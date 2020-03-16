@@ -89,5 +89,5 @@ all_heading_contents = get_text_subsets( soup.contents, line_numbers_start, line
 tag_dict = build_flattened_text_dictionary( all_heading_contents, tags )
 			
 for tag, contents in tag_dict.items():
-	with open(f'{output_folder}/{tag}.html', mode='w') as File:
+	with open(f'{output_folder}{"/" if len(output_folder) else ""}{tag}.html', mode='w') as File:
 		File.write( contents ) #str([line for line in contents]) )
