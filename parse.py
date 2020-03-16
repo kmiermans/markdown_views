@@ -9,7 +9,6 @@ file_name = 'unijour.md'
 
 ## todo automatically detect keywords
 
-## todo don't include next heading that is a parent of the current heading
 
 ## returns string input file, where the markdown was parsed into html
 def parse_file_as_html( _file_name_ ):
@@ -69,12 +68,12 @@ soup = BeautifulSoup(html, 'html.parser')
 
 line_numbers_this_level = get_string_pattern_line_numbers( soup.contents, f'<h{level}>' )
 line_numbers_parent     = get_string_pattern_line_numbers( soup.contents, f'<h{level-1}>' )
+line_numbers_parent += [len(soup.contents)]
 # line_numbers_end = line_numbers_this_level + line_numbers_parent
 # line_numbers_end = sorted( line_numbers_end )
 line_numbers_start = line_numbers_this_level
 line_numbers_end = get_next_biggest_numbers( line_numbers_this_level, line_numbers_parent ) 
-line_numbers_end += [-1]
-
+# line_numbers_end += [-1]
 
 
 all_heading_contents = get_text_subsets( soup.contents, line_numbers_start, line_numbers_end )
