@@ -12,8 +12,7 @@ Some additional reasons for this project:
 - You'd like to show someone some notes, but not show them your private notes.
 
 # How it works
-For now, tags are not automatically detected and have to be manually specified. At the top of parse.py, enter your parameters.
-It's all pretty self-explanatory.
+For now, tags are not automatically detected and have to be manually specified. In the JSON file parse_params.json, enter your parameters. It's all pretty self-explanatory.
 
 # How I use it
 I have a bash alias for committing changes to my markdown file with a single command. To that bash alias, I added a 
