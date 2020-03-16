@@ -43,7 +43,6 @@ def build_flattened_text_dictionary( text_subsets, dict_keys ):
 		for it, contents in enumerate(text_subsets):
 			if tag in str(contents[0]):
 				string_list = [str(el) for el in contents]
-				print( ''.join(string_list) )
 				result[tag] += ''.join(string_list)
 	return result
 
