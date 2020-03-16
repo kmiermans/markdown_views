@@ -1,9 +1,9 @@
 import markdown
 from bs4 import BeautifulSoup
 
-level = 2
-tags = ['@journaling','@critical-thinking', '@data-science']
-file_name = 'unijour.md'
+level = 2 # depth of heading at which the tags are found
+tags = ['@journaling','@critical-thinking', '@data-science'] # tags to look for
+file_name = 'unijour.md' # file to scrape
 
 
 
