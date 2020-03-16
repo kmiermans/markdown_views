@@ -17,8 +17,10 @@ It's all pretty self-explanatory.
 
 # How I use it
 I have a bash alias for committing changes to my markdown file with a single command. To that bash alias, I added a 
-command to automatically run the markdown_views. It looks like this:
-`alias push="cd /Users/karsten/Documents/notes && git add -A && git commit -m\"from macbook\" && git push && python3 markdown_views/parse.py"`
+command to automatically run the markdown_views. The push and pull commands look like this:
+`
+alias push="cd /Users/karsten/Documents/notes && python3 markdown_views/parse.py && git add -A && git commit -m\"from macbook\" && git push
+`
 
 # Re-use
 Fork, branch, share and re-use any way you like!
