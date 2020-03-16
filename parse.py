@@ -1,13 +1,21 @@
 import markdown
 from bs4 import BeautifulSoup
+import json
 
-level = 2 # depth of heading at which the tags are found
-tags = ['@journaling','@critical-thinking', '@data-science', '@health'] # tags to look for
-file_name = 'unijour.md' # file to scrape
+with open('markdown_views/parse_params.json', mode='r') as param_file:
+    data = json.load(param_file)
+    level = data['level']
+    file_name = data['file_name']
+    tags = data['tags']
 
 
+# level = 2 # depth of heading at which the tags are found
+
+## todo put everything that *doesn't* have a keyword in a file named "untagged.html"
 
 ## todo automatically detect keywords
+
+## todo add math automatically through math parser?
 
 
 ## returns string input file, where the markdown was parsed into html
