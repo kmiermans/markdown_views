@@ -1,0 +1,6 @@
+{
+"level" : 2,
+"file_name" : "markdown_views/dummy_text.md",
+"output_folder": "markdown_views/html/",
+"tags" : ["@tag_1","@tag_2"]
+}
