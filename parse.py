@@ -3,30 +3,53 @@ from bs4 import BeautifulSoup
 
 level = 2
 tags = ['@journaling','@critical-thinking', '@data-science']
+file_name = 'unijour.md'
 
-input_file = open('unijour.md') #, mode="r", encoding="utf-8")
-text = input_file.read()
-# text
-html = markdown.markdown(text)
+## todo automatically detect keywords
+
+## todo don't include next heading that is a parent of the current heading
+
+## returns string input file, where the markdown was parsed into html
+def parse_file_as_html( _file_name_ ):
+	input_file = open(_file_name_, mode='r')
+	text = input_file.read()
+
+	html = markdown.markdown(text)
+
+	return html
+
+def get_string_pattern_line_numbers( _soup_contents_, pattern ):
+	result = []
+	for line_nr, line in enumerate(_soup_contents_):
+	    if pattern == str(line)[:len(pattern)]:
+	    	result += [line_nr]
+	return result
+
+def get_text_subsets( string_list, line_nr_start, line_nr_end ):
+	result = []
+	for start, end in zip(line_nr_start, line_nr_end):
+	    result += [string_list[start:end]]
+	return result
+
+## searches through all elements in the Nx1 list :param text_subsets for the pattern in :param dict_keys
+## if a key in :param dict_keys appears in an element of text_subsets, it's added to the dictionary
+## the values in the dictionary are single strings in HTML
+def build_flattened_text_dictionary( text_subsets, dict_keys ):
+	result = { tag: [] for tag in tags }
+	for tag in result.keys():
+	    for it, contents in enumerate(text_subsets):
+	        if tag in str(contents[0]):
+	            result[tag] += [str(el) for el in contents] # ''.join(contents)
+	return result
+
+html = parse_file_as_html( file_name )
 
 soup = BeautifulSoup(html, 'html.parser')
-headings = soup.find_all(f'h{level}')
-soup.contents
-line_numbers = []
-for line_nr, line in enumerate(soup.contents):
-    tag = f'<h{level}>'
-    if tag == str(line)[:len(tag)]:
-        line_numbers += [line_nr]
-all_heading_contents = []
-for line_nr_start, line_nr_end in zip(line_numbers[:-1], line_numbers[1:]):
-    all_heading_contents += [soup.contents[line_nr_start:line_nr_end]]
+# headings = soup.find_all(f'h{level}')
 
-tag_dict = { tag: [] for tag in tags }
-for tag in tag_dict.keys():
-
-    for it, contents in enumerate(all_heading_contents):
-        if tag in str(contents[0]):
-            tag_dict[tag] += [str(el) for el in contents]
+line_numbers = get_string_pattern_line_numbers( soup.contents, f'<h{level}>' )
+all_heading_contents = get_text_subsets( soup.contents, line_numbers[:-1], line_numbers[1:] )
+tag_dict = build_flattened_text_dictionary( all_heading_contents, tags )
             
 for tag, contents in tag_dict.items():
     with open(f'{tag}.html', mode='w') as File:
