@@ -1,4 +1,4 @@
-# markdown_views
+# markdown_views: What is it.
 Outputs different HTML 'views' of a markdown file based on tags that are found in headers.
 
 # Purpose and value
@@ -14,6 +14,11 @@ Some additional reasons for this project:
 # How it works
 For now, tags are not automatically detected and have to be manually specified. At the top of parse.py, enter your parameters.
 It's all pretty self-explanatory.
+
+# How I use it
+I have a bash alias for committing changes to my markdown file with a single command. To that bash alias, I added a 
+command to automatically run the markdown_views. It looks like this:
+`alias push="cd /Users/karsten/Documents/notes && git add -A && git commit -m\"from macbook\" && git push && python3 markdown_views/parse.py"`
 
 # Re-use
 Fork, branch, share and re-use any way you like!
