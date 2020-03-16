@@ -14,6 +14,8 @@ with open('markdown_views/parse_params.json', mode='r') as param_file:
 
 ## todo put everything that *doesn't* have a keyword in a file named "untagged.html"
 
+## todo prettier formatting : add hlines between non-contiguous headings?
+
 ## todo automatically detect keywords
 
 ## todo add math automatically through math parser?
