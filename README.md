@@ -11,6 +11,9 @@ Some additional reasons for this project:
 - You'd like to compile the information on a given topic and not be distracted by all the other stuff.
 - You'd like to show someone some notes, but not show them your private notes.
 
+# Example
+Example output can be found in the folder "HTML", and you can re-generate it with out of the box. Just run `python parse.py` and that should do the trick. You might have to `cwd` into this folder first.
+
 # How it works
 For now, tags are not automatically detected and have to be manually specified. In the JSON file parse_params.json, enter your parameters. It's all pretty self-explanatory.
 
