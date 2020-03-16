@@ -7,6 +7,7 @@ with open('markdown_views/parse_params.json', mode='r') as param_file:
     level = data['level']
     file_name = data['file_name']
     tags = data['tags']
+    output_folder = data['output_folder']
 
 
 # level = 2 # depth of heading at which the tags are found
@@ -88,5 +89,5 @@ all_heading_contents = get_text_subsets( soup.contents, line_numbers_start, line
 tag_dict = build_flattened_text_dictionary( all_heading_contents, tags )
 			
 for tag, contents in tag_dict.items():
-	with open(f'{tag}.html', mode='w') as File:
+	with open(f'{output_folder}/{tag}.html', mode='w') as File:
 		File.write( contents ) #str([line for line in contents]) )
