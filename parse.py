@@ -5,6 +5,8 @@ level = 2
 tags = ['@journaling','@critical-thinking', '@data-science']
 file_name = 'unijour.md'
 
+
+
 ## todo automatically detect keywords
 
 ## todo don't include next heading that is a parent of the current heading
@@ -24,6 +26,20 @@ def get_string_pattern_line_numbers( _soup_contents_, pattern ):
 		if pattern == str(line)[:len(pattern)]:
 			result += [line_nr]
 	return result
+
+def get_next_biggest_numbers( list_1, list_2 ):
+	## very messy implementation. I assume here that |list_2| << |list_1|, so using an O(n) impl in the size of |list_2|
+	result = []
+	list_comb = sorted( list_1 + list_2 )
+	it_start = 0
+	for small_el in list_1:
+		# closest_val = min(list_comb, key=lambda x:abs(x-el))
+		for it_start, big_el in enumerate(list_comb[it_start:]):
+			if big_el > small_el:
+				result += [ big_el ]
+				break
+	return result
+
 
 def get_text_subsets( string_list, line_nr_start, line_nr_end ):
 	result = []
@@ -51,8 +67,17 @@ html = parse_file_as_html( file_name )
 soup = BeautifulSoup(html, 'html.parser')
 # headings = soup.find_all(f'h{level}')
 
-line_numbers = get_string_pattern_line_numbers( soup.contents, f'<h{level}>' )
-all_heading_contents = get_text_subsets( soup.contents, line_numbers[:-1], line_numbers[1:] )
+line_numbers_this_level = get_string_pattern_line_numbers( soup.contents, f'<h{level}>' )
+line_numbers_parent     = get_string_pattern_line_numbers( soup.contents, f'<h{level-1}>' )
+# line_numbers_end = line_numbers_this_level + line_numbers_parent
+# line_numbers_end = sorted( line_numbers_end )
+line_numbers_start = line_numbers_this_level
+line_numbers_end = get_next_biggest_numbers( line_numbers_this_level, line_numbers_parent ) 
+line_numbers_end += [-1]
+
+
+
+all_heading_contents = get_text_subsets( soup.contents, line_numbers_start, line_numbers_end )
 tag_dict = build_flattened_text_dictionary( all_heading_contents, tags )
 			
 for tag, contents in tag_dict.items():
