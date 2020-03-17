@@ -4,7 +4,7 @@ Outputs different HTML 'views' of a markdown file based on tags that are found i
 # Purpose and value
 I like to use a single big markdown file with all of my notes (work-related, personal, etc.). Over time, however,
 that single file can become unwieldy. This project aims at partially solving that, by creating HTML files that
-only contain a subset of the markdown tagged by a string in the headgins.
+only contain a subset of the markdown tagged by a string in the headings.
 
 Some additional reasons for this project:
 - You'd like to send your notes to someone, but not *all* of your notes.
